@@ -9,12 +9,18 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @user = User.new(first_name: "Marin", last_name: "chrétien", email: "marin.chretien",  city_id: City.all.sample.id)
   end
 
   def create
-    user = User.create(user_params)
-    redirect_to user_path(user.id)
+    params.permit!
+    @user = User.new(first_name: params[:first_name], last_name: params[:last_name], email: params[:email],  city_id: City.all.sample.id, password: params[:password], password_confirmation: params[:password_confirmation])
+    @user.city_id = City.all.sample.id
+    @user.save
+    puts "###########################"
+    puts @user.first_name
+    puts "###########################"
+    redirect_to gossips_path
 
   end
 
@@ -36,7 +42,7 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :description, :email, :password, :age, :city_id)
+    #params.require(:user).permit(:first_name, :last_name, :description, :email, :password, :age, :city_id)
   end 
 
 end

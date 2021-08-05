@@ -25,10 +25,10 @@ class CommentsController < ApplicationController
     @num = params[:gossip_id]
     @comment = Comment.new(gossip_id:@num, user_id:1)
     puts "$$$$$$$$$$$$$$$$$$$$$$$$$"
-    puts params[:comment]
+    puts params[:content]
     puts params
     puts "$$$$$$$$$$$$$$$$$$$$$$$$$"
-    @comment.content = params[:comment]
+    @comment.content = params[:content]
     @comment.save
     redirect_to gossip_path(@num)
   end

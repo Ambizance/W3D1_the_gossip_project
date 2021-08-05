@@ -19,7 +19,7 @@
 <%= form_with model:@comment, url:gossip_comments_path(@num), method: :post, local:true do |form| %>
     <div class = "form-group">
         <%= label_tag 'Rajoute un commentaire !' %>
-        <%= form.text_field :content, class:'form-control'%>
+        <%= form.text_field ':content', class:'form-control'%>
     </div>
     <%= form.submit "Publie ton commentaire" %>
 <%end%>
@@ -27,7 +27,7 @@
   <div class="card" style="width: 20rem;">
     <%# <img class="card-img-top" src="..." alt="Card image cap"> %>
     <div class="card-body">
-      <p class="card-text content"><%= comment.content%></p>
+      <p class="card-text" content><%= comment.content%></p>
 
       <div class="auteur">by <%= User.find(comment.user_id).first_name %></div>
       <p> <a href="<%= edit_gossip_comment_path(comment.id) %>" class="btn btn-primary">Editer le commentaire</a>  </p>
