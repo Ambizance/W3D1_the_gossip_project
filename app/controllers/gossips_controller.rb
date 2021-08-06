@@ -1,13 +1,15 @@
 class GossipsController < ApplicationController
+  before_action :authenticate_user, only: [:new, :create]
+
   def index
     # Méthode qui récupère tous les potins et les envoie à la view index (index.html.erb) pour affichage
     @gossips = Gossip.all
-    id = session[:user_id]
-    @user = User.find(id)
+    #id = session[:user_id]
+    #@user = User.find(id)
     
-    puts "&&&&&&&&&&&&&&&&&&&&&"  
-    puts @user
-    puts "&&&&&&&&&&&&&&&&&&&&&"
+    #puts "&&&&&&&&&&&&&&&&&&&&&"  
+    #puts @user
+    #puts "&&&&&&&&&&&&&&&&&&&&&"
   end
 
   def show
@@ -75,4 +77,11 @@ class GossipsController < ApplicationController
     params.require(:gossip).permit(:title, :content) 
   end
 
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
+  
 end
